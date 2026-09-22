@@ -2,8 +2,7 @@
 > A clean, beautiful, responsive portfolio template for Software Developers!
 
 **Catherine Tang**
-This repository is based on
-https://github.com/varadbhogayata/varadbhogayata.github.io.
+This repository is based on https://github.com/varadbhogayata/varadbhogayata.github.io.
 
 > https://varadbhogayata.github.io
 
