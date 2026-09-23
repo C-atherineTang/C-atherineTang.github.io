@@ -126,6 +126,11 @@
       </li>
 
       <li class="bold">
+        <a aria-label="Navigate to the Places Travelled section" href="#places" class="waves-effect waves-dark teal-text"><i
+            class="mdi-maps-place small"></i><span>Places Travelled</span></a>
+      </li>
+
+      <li class="bold">
         <!-- 
         1. mdi-communication-contacts
         2. mdi-content-mail
@@ -187,6 +192,10 @@
       <li class="bold">
         <a aria-label="Navigate to the Education section" href="#education" class="waves-effect waves-dark teal-text"><i
             class="mdi-social-school small"></i><span>Education</span></a>
+      </li>
+      <li class="bold">
+        <a aria-label="Navigate to the Places Travelled section" href="#places" class="waves-effect waves-dark teal-text"><i
+            class="mdi-maps-place small"></i><span>Places Travelled</span></a>
       </li>
       <li class="bold">
         <a aria-label="Navigate to the Contact section" href="#contact" class="waves-effect waves-dark teal-text"><i
@@ -313,8 +322,7 @@
           <div class="card-content">
             <div class="row">
               <div class="col s12 m2">
-                <a href="https://www.opg.com/" target="_blank"><img alt="Ontario Power Generation logo"
-                    src="https://logo.clearbit.com/opg.com" class="responsive-img center-block" /></a>
+                <a href="https://www.opg.com/" target="_blank"></a>
               </div>
               <div class="col s12 m10">
                 <p>
@@ -349,28 +357,9 @@
     <section id="projects" class="section scrollspy">
       <h3 class="page-title white-text teal">Projects</h3>
       <div class="container">
-        <div class="row">
-
-          <div class="col s12 m6 l4">
-            <div class="card">
-              <div class="card-content">
-                <span class="card-title teal-text hoverline">Vision Project</span>
-                <p>
-                  A research and design project in collaboration with the City of Toronto and the Canadian National Institute for the Blind (CNIB) to improve accessible navigation for users with low or no vision.
-                </p>
-                <ul>
-                  <li>Identified accessibility challenges in existing mapping software through stakeholder engagement with the City of Toronto and CNIB.</li>
-                  <li>Developed and presented a proposal for alternative accessible navigation tools to improve inclusivity and usability of mapping technology.</li>
-                  <li>Implemented a draft navigation solution in C++ as part of ECE297.</li>
-                  <li><b>Tools:</b> C++</li>
-                </ul>
-              </div>
-              <div class="card-action">
-                <span>Summer 2023 | Vision Project Lead</span>
-              </div>
-            </div>
-          </div>
-
+        <div id="projects-container" class="row"></div>
+        <div class="center-align" style="margin-bottom: 40px;">
+          <button id="load-more-btn" onclick="loadMoreProjects()" class="btn waves-effect waves-light" style="background-color:#9575cd;">Load More</button>
         </div>
       </div>
     </section>
@@ -488,6 +477,20 @@
       </div>
     </section>
 
+    <!-- Places Travelled Section -->
+    <section id="places" class="section scrollspy">
+      <h3 class="page-title white-text teal">Places Travelled</h3>
+      <div class="container">
+        <p>A place I would like to visit is Hong Kong.</p>
+        <div class="map-container">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d236280.54290407445!2d113.93412!3d22.3526738!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3403e2eda332b93d%3A0x26dd538a9a3e8a09!2sHong%20Kong!5e0!3m2!1sen!2sca!4v1700000000000"
+            width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </section>
+
     <!-- Eight Section: Contact -->
     <section id="contact" class="section scrollspy full-height">
       <h3 class="page-title white-text teal">Contact</h3>
@@ -545,6 +548,78 @@
       })
     })
   </script>
+  <!-- Projects JavaScript -->
+  <script>
+    var projects = [
+      {
+        title: "Vision Project",
+        description: "A research and design project in collaboration with the City of Toronto and the Canadian National Institute for the Blind (CNIB) to improve accessible navigation for users with low or no vision.",
+        bullets: [
+          "Identified accessibility challenges in existing mapping software through stakeholder engagement with the City of Toronto and CNIB.",
+          "Developed and presented a proposal for alternative accessible navigation tools to improve inclusivity and usability of mapping technology.",
+          "Implemented a draft navigation solution in C++ as part of ECE297."
+        ],
+        tools: "C++",
+        date: "Summer 2023 | Vision Project Lead"
+      },
+      {
+        title: "AI-Enabled Backend",
+        description: "Developed an AI-enabled backend integrating internal tools, including Confluence and Bitbucket, with AI models to automate workflows such as requirements summarization and code generation.",
+        bullets: [],
+        tools: "Python, Kiro",
+        date: ""
+      },
+      {
+        title: "Telephony Event Injection",
+        description: "Developed an application to inject telephony events into the Genesys Cloud platform, supporting testing of platform functionality.",
+        bullets: [],
+        tools: "Python",
+        date: ""
+      },
+      {
+        title: "Visualization of Training Data",
+        description: "Transformed employee training data into actionable visuals on dynamic real-time dashboards.",
+        bullets: [
+          "Worked with senior engineers to identify gaps and define requirements for automating employee training data.",
+          "Collaborated with cross-functional teams to compile and normalize disparate data attributes.",
+          "Transformed training data into actionable visuals presented on dynamic real-time dashboards in Power BI."
+        ],
+        tools: "Power BI",
+        date: ""
+      }
+    ];
+
+    var projectsShown = 0;
+    var projectsPerLoad = 2;
+
+    function renderProjects() {
+      var container = document.getElementById('projects-container');
+      var end = Math.min(projectsShown + projectsPerLoad, projects.length);
+      for (var i = projectsShown; i < end; i++) {
+        var p = projects[i];
+        var bullets = p.bullets.map(function(b) { return '<li>' + b + '</li>'; }).join('');
+        var card = '<div class="col s12 m6 l4"><div class="card"><div class="card-content">'
+          + '<span class="card-title teal-text hoverline">' + p.title + '</span>'
+          + '<p>' + p.description + '</p>'
+          + '<ul>' + bullets + '<li><b>Tools:</b> ' + p.tools + '</li></ul>'
+          + '</div>'
+          + (p.date ? '<div class="card-action"><span>' + p.date + '</span></div>' : '')
+          + '</div></div>';
+        container.innerHTML += card;
+      }
+      projectsShown = end;
+      if (projectsShown >= projects.length) {
+        document.getElementById('load-more-btn').style.display = 'none';
+      }
+    }
+
+    function loadMoreProjects() {
+      renderProjects();
+    }
+
+    renderProjects();
+  </script>
+
 </body>
 
 </html>
