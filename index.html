@@ -550,6 +550,15 @@
   </script>
   <!-- Projects JavaScript -->
   <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+      var btn = document.getElementById('dark-mode-btn');
+      btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+    }
+  </script>
+
+  <!-- Projects JavaScript -->
+  <script>
     var projects = [
       {
         title: "Vision Project",
@@ -619,6 +628,12 @@
 
     renderProjects();
   </script>
+
+  <!-- Dark Mode Toggle -->
+  <button id="dark-mode-btn" onclick="toggleDarkMode()" title="Toggle Dark Mode"
+    style="position:fixed;bottom:20px;right:20px;z-index:9999;background:#9575cd;border:none;border-radius:50%;width:50px;height:50px;cursor:pointer;font-size:22px;color:white;box-shadow:0 2px 8px rgba(0,0,0,0.3);">
+    🌙
+  </button>
 
 </body>
 
